@@ -974,10 +974,7 @@ namespace WpfHexaEditor
                     SelectionStop = ctrl.BytePositionInFile;
                 }
 
-                if (ctrl is StringByte)
-                    UpdateSelectionColor(FirstColor.StringByteData);
-                else
-                    UpdateSelectionColor(FirstColor.HexByteData);
+                UpdateSelectionColor(ctrl is StringByte ? FirstColor.StringByteData : FirstColor.HexByteData);
 
                 UpdateVisual();
             }
@@ -996,10 +993,7 @@ namespace WpfHexaEditor
                 //update selection
                 SelectionStop = bCtrl.BytePositionInFile != -1 ? bCtrl.BytePositionInFile : LastVisibleBytePosition;
 
-                if (focusedControl is HexByte)
-                    UpdateSelectionColor(FirstColor.HexByteData);
-                else
-                    UpdateSelectionColor(FirstColor.StringByteData);
+                UpdateSelectionColor(focusedControl is HexByte ? FirstColor.HexByteData : FirstColor.StringByteData);
 
                 UpdateSelection();
             }
