@@ -69,7 +69,7 @@ namespace WpfHexaEditor
 
             var newValue = (long) baseValue;
 
-            if (newValue > ctrl.MaximumValue) newValue = ctrl.MaximumValue;
+            if (ctrl != null && newValue > ctrl.MaximumValue) newValue = ctrl.MaximumValue;
             if (newValue < 0) newValue = 0;
 
             return newValue;

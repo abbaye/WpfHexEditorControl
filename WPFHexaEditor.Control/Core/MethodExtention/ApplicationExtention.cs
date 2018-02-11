@@ -37,7 +37,7 @@ namespace WpfHexaEditor.Core.MethodExtention
 
         private static object ExitFrame(object f)
         {
-            (f as DispatcherFrame).Continue = false;
+            ((DispatcherFrame) f).Continue = false;
             return null;
         }
     }

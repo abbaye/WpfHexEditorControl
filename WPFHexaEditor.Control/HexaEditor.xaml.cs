@@ -974,7 +974,9 @@ namespace WpfHexaEditor
 
         private void Control_Click(object sender, EventArgs e)
         {
+
             if (!(sender is IByteControl ctrl)) return;
+
 
             if (Keyboard.Modifiers == ModifierKeys.Shift)
                 SelectionStop = ctrl.BytePositionInFile;
@@ -997,8 +999,10 @@ namespace WpfHexaEditor
 
             var focusedControl = Keyboard.FocusedElement;
 
+
             //update selection
             SelectionStop = bCtrl.BytePositionInFile != -1 ? bCtrl.BytePositionInFile : LastVisibleBytePosition;
+
 
             UpdateSelectionColor(focusedControl is HexByte ? FirstColor.HexByteData : FirstColor.StringByteData);
             UpdateSelection();

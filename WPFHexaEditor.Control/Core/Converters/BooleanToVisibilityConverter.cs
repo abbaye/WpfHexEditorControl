@@ -20,7 +20,7 @@ namespace WpfHexaEditor.Core.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var boolValue = (bool) value;
+            var boolValue = value != null && (bool) value;
 
             if (Inverted)
                 boolValue = !boolValue;
