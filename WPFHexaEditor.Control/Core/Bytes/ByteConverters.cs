@@ -1,5 +1,5 @@
 ﻿//////////////////////////////////////////////
-// Apache 2.0  - 2016-2017
+// Apache 2.0  - 2016-2018
 // Author : Derek Tremblay (derektremblay666@gmail.com)
 //////////////////////////////////////////////
 
@@ -226,7 +226,7 @@ namespace WpfHexaEditor.Core.Bytes
         /// <summary>
         /// Convert decimal to binary representation
         /// </summary>
-        public static string DecimalToBinary(long decimalNumber)
+        public static string ToBinary(long decimalNumber)
         {
             var result = string.Empty;
 
@@ -239,5 +239,7 @@ namespace WpfHexaEditor.Core.Bytes
 
             return result;
         }
+
+        public static string ToBinary(byte b) => Convert.ToString(b, 2).PadLeft(8, '0');
     }
 }

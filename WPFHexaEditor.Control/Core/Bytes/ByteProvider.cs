@@ -1,5 +1,5 @@
 ﻿//////////////////////////////////////////////
-// Apache 2.0  - 2016-2017
+// Apache 2.0  - 2016-2018
 // Author : Derek Tremblay (derektremblay666@gmail.com)
 //////////////////////////////////////////////
 
@@ -54,6 +54,7 @@ namespace WpfHexaEditor.Core.Bytes
         public event EventHandler DataPasted;
         public event EventHandler FillWithByteCompleted;
         public event EventHandler ReplaceByteCompleted;
+        public event EventHandler BytesAppendCompleted;
 
         #endregion Events
 
@@ -293,15 +294,15 @@ namespace WpfHexaEditor.Core.Bytes
         /// Submit change in a new file (Save as...)
         /// TODO: ADD VALIDATION
         /// </summary>
-        public bool SubmitChanges(string newFilename, bool overwrite = false)
+        public bool SubmitChanges(string newFileName, bool overwrite = false)
         {
             _newfilename = string.Empty;
 
-            if (File.Exists(newFilename) && !overwrite)
+            if (File.Exists(newFileName) && !overwrite)
                 return false;
 
             //Save as
-            _newfilename = newFilename;
+            _newfilename = newFileName;
             File.Create(_newfilename).Close();
             SubmitChanges();
             return true;
@@ -830,11 +831,14 @@ namespace WpfHexaEditor.Core.Bytes
                 case CopyPasteMode.JavaCode:
                     CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Java);
                     break;
-                case CopyPasteMode.FSharp:
+                case CopyPasteMode.FSharpCode:
                     CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.FSharp);
                     break;
                 case CopyPasteMode.VbNetCode:
                     CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Vbnet);
+                    break;
+                case CopyPasteMode.PascalCode:
+                    CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Pascal);
                     break;
             }
 
@@ -876,6 +880,10 @@ namespace WpfHexaEditor.Core.Bytes
                 case CodeLanguage.Vbnet:
                     sb.Append(
                         $"' {FileName} ({DateTime.Now.ToString(CultureInfo.CurrentCulture)}), \r\n' StartPosition: &H{ByteConverters.LongToHex(selectionStart)}, StopPosition: &H{ByteConverters.LongToHex(selectionStop)}, Lenght: &H{ByteConverters.LongToHex(lenght)}");
+                    break;
+                case CodeLanguage.Pascal:
+                    sb.Append(
+                        "{ " + $" {FileName} ({DateTime.Now.ToString(CultureInfo.CurrentCulture)}), \r\n   StartPosition: 0x{ByteConverters.LongToHex(selectionStart)}, StopPosition: 0x{ByteConverters.LongToHex(selectionStop)}, Lenght: 0x{ByteConverters.LongToHex(lenght)}" + " }");
                     break;
                 case CodeLanguage.FSharp:
                     sb.Append(
@@ -947,6 +955,17 @@ namespace WpfHexaEditor.Core.Bytes
                     sb.AppendLine();
                     sb.Append("\t");
                     break;
+                case CodeLanguage.Pascal:
+                    sb.Append($"sData: string = @\'{ByteConverters.BytesToString(buffer)}\';");
+                    sb.AppendLine();
+                    sb.Append(
+                        $"sDataHex: string = @\'{ByteConverters.StringToHex(ByteConverters.BytesToString(buffer))}\';");
+                    sb.AppendLine();
+                    sb.AppendLine();
+                    sb.Append($"RawData: array[0..{buffer.Length - 1}] of Byte = (");
+                    sb.AppendLine();
+                    sb.Append("  ");
+                    break;
             }
 
             #endregion
@@ -958,9 +977,22 @@ namespace WpfHexaEditor.Core.Bytes
                 i++;
                 if (language == CodeLanguage.Java) sb.Append("(byte)");
 
-                sb.Append(language == CodeLanguage.Vbnet
-                    ? $"&H{ByteConverters.ByteToHex(b)}, "
-                    : $"0x{ByteConverters.ByteToHex(b)}{delimiter} ");
+                #region Append byte
+                string byteStr;
+                switch (language)
+                {
+                    case CodeLanguage.Vbnet:
+                        byteStr = $"&H{ByteConverters.ByteToHex(b)}, ";
+                        break;
+                    case CodeLanguage.Pascal:
+                        byteStr = $"${ByteConverters.ByteToHex(b)}, ";
+                        break;
+                    default:
+                        byteStr = $"0x{ByteConverters.ByteToHex(b)}{delimiter} ";
+                        break;
+                }
+                sb.Append(byteStr);
+                #endregion
 
                 if (i == (language == CodeLanguage.Java ? 6 : 12))
                 {
@@ -972,8 +1004,23 @@ namespace WpfHexaEditor.Core.Bytes
             }
             if (language == CodeLanguage.Vbnet) sb.Append("_");
             sb.AppendLine();
-            sb.Append(language != CodeLanguage.FSharp ? "};" : "|]");
+            #endregion
 
+            #region End of block
+            string sByteEnd;
+            switch (language)
+            {
+                case CodeLanguage.FSharp:
+                    sByteEnd = "|]";
+                    break;
+                case CodeLanguage.Pascal:
+                    sByteEnd = ");";
+                    break;
+                default:
+                    sByteEnd = "};";
+                    break;
+            }
+            sb.Append(sByteEnd);
             #endregion
 
             da.SetText(sb.ToString(), TextDataFormat.Text);
@@ -1315,7 +1362,10 @@ namespace WpfHexaEditor.Core.Bytes
         /// COUNT OF 0xff
         /// var cnt = GetByteCount()[0xff]
         /// </example>
-        /// <returns></returns>
+        /// <remarks>
+        /// https://stackoverflow.com/questions/45656378/c-what-is-the-fastest-way-to-count-byte-in-a-file/45656760#45656760
+        /// With help of Georg and David Heffernan on stackoverflow
+        /// </remarks>
         public long[] GetByteCount()
         {
             if (IsOpen)
@@ -1324,25 +1374,22 @@ namespace WpfHexaEditor.Core.Bytes
                 IsOnLongProcess = true;
                 LongProcessStarted?.Invoke(this, new EventArgs());
 
+                const int copyBufferSize = 1024 * 1024;
                 var cancel = false;
-                const int bufferLenght = 1048576; //1mb
+                var buffer = new byte[copyBufferSize];
                 var storedCnt = new long[256];
+                int count;
+
                 Position = 0;
 
-                while (!Eof)
+                while ((count = Read(buffer, 0, copyBufferSize)) > 0)
                 {
-                    var buffer = new byte[bufferLenght];
-
-                    Read(buffer, 0, bufferLenght);
-
-                    foreach (var b in buffer)
-                        storedCnt[b]++;
-
-                    Position += bufferLenght;
+                    for (var i = 0; i < count; i++)
+                        storedCnt[buffer[i]]++;
 
                     //Do not freeze UI...
                     if (Position % 2000 == 0)
-                        LongProcessProgress = (double) Position / Length;
+                        LongProcessProgress = (double)Position / Length;
 
                     //Break long process if needed
                     if (!IsOnLongProcess)
@@ -1378,11 +1425,15 @@ namespace WpfHexaEditor.Core.Bytes
         /// </summary>
         public void AppendByte(byte[] bytesToAppend)
         {
+            if (bytesToAppend == null) return;
+
             _stream.Position = _stream.Length;
             _stream.SetLength(Length + bytesToAppend.Length);
 
             foreach (byte b in bytesToAppend)
                 _stream.WriteByte(b);
+
+            BytesAppendCompleted?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
@@ -1395,6 +1446,8 @@ namespace WpfHexaEditor.Core.Bytes
 
             for (var i = 0; i < count; i++)
                 _stream.WriteByte(byteToAppend);
+
+            BytesAppendCompleted?.Invoke(this, new EventArgs());
         }
 
         #endregion Append byte at end of file
@@ -1493,5 +1546,28 @@ namespace WpfHexaEditor.Core.Bytes
             }
         }
         #endregion Serialize (save/load) current state
+
+        #region Reverse bytes selection
+
+        /// <summary>
+        /// Reverse bytes array like this {AA, FF, EE, DC} => {DC, EE, FF, AA}
+        /// </summary>
+        public void Reverse(long selectionStart, long selectionStop)
+        {
+            var data = GetCopyData(selectionStart, selectionStop, true);
+
+            #region Set start position
+
+            var startPosition = (selectionStart != selectionStop
+                ? (selectionStart > selectionStop ? selectionStop : selectionStart)
+                : selectionStart) + data.Length;
+
+            #endregion
+
+            foreach (byte b in data)
+                AddByteModified(b, --startPosition, data.Length);
+        }
+
+        #endregion
     }
 }

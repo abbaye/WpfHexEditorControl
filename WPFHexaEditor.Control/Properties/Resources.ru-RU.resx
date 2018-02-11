@@ -141,8 +141,14 @@
   <data name="ClearBookMarkString" xml:space="preserve">
     <value>Очистить закладку</value>
   </data>
+  <data name="ClearString" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
   <data name="ClickToGoAtPositionString" xml:space="preserve">
     <value>Нажмите, чтобы перейти в позицию.</value>
+  </data>
+  <data name="CloseString" xml:space="preserve">
+    <value>Закрыть</value>
   </data>
   <data name="CopyAsASCIIString" xml:space="preserve">
     <value>Скопировать как ASCII</value>
@@ -186,11 +192,32 @@
   <data name="FillSelectionString" xml:space="preserve">
     <value>Заполните выбор байтом ...</value>
   </data>
+  <data name="FindAllString" xml:space="preserve">
+    <value>Bce</value>
+  </data>
+  <data name="FindAndReplaceString" xml:space="preserve">
+    <value>Найти и заменить</value>
+  </data>
   <data name="FindByteString" xml:space="preserve">
     <value>Байт для поиска</value>
   </data>
+  <data name="FindFirstString" xml:space="preserve">
+    <value>Первый</value>
+  </data>
+  <data name="FindLastString" xml:space="preserve">
+    <value>Последний</value>
+  </data>
+  <data name="FindNextString" xml:space="preserve">
+    <value>следующий</value>
+  </data>
   <data name="FindSelectionString" xml:space="preserve">
     <value>Найти все случаи отбора</value>
+  </data>
+  <data name="FindString" xml:space="preserve">
+    <value>найти</value>
+  </data>
+  <data name="FindWhatString" xml:space="preserve">
+    <value>Найти то, что:</value>
   </data>
   <data name="FirstByteString" xml:space="preserve">
     <value>Первый байт</value>
@@ -231,14 +258,26 @@
   <data name="PositionString" xml:space="preserve">
     <value>Должность</value>
   </data>
+  <data name="ReplaceAllString" xml:space="preserve">
+    <value>Заменить bce</value>
+  </data>
   <data name="ReplaceByByteString" xml:space="preserve">
     <value>Заменить байтом</value>
+  </data>
+  <data name="ReplaceNextString" xml:space="preserve">
+    <value>замените следующие</value>
   </data>
   <data name="ReplaceSelectionString" xml:space="preserve">
     <value>Заменить байт в выборе ...</value>
   </data>
+  <data name="ReplaceString" xml:space="preserve">
+    <value>Заменить</value>
+  </data>
   <data name="ReplaceWithByteString" xml:space="preserve">
     <value>Заменить байт</value>
+  </data>
+  <data name="ReplaceWithString" xml:space="preserve">
+    <value>Заменить:</value>
   </data>
   <data name="SelectAllString" xml:space="preserve">
     <value>Выбор всех</value>

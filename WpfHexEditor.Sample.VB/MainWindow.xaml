@@ -10,7 +10,7 @@
     Height="350"
     mc:Ignorable="d">
     <Grid>
-        <wpfHexaEditor:HexEditor x:Name="HexEditor" Margin="0,35,0,0" />
+        <wpfHexaEditor:HexEditor x:Name="HexEditor" Margin="0,35,0,0" ForegroundSecondColor="Blue"/>
         <Button
             Width="75"
             Margin="10,10,0,0"

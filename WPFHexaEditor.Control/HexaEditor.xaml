@@ -1,5 +1,5 @@
 ﻿<!--
-    Apache 2.0  - 2016-2017
+    Apache 2.0  - 2016-2018
     Author : Derek Tremblay (derektremblay666@gmail.com)
 -->
 
@@ -15,10 +15,10 @@
     d:DesignWidth="804"
     BorderBrush="#FF443E3E"
     BorderThickness="1"
-    Drop="UserControl_Drop"
+    Drop="Control_Drop"
     Focusable="True"
     FontSize="11"
-    MouseWheel="UserControl_MouseWheel"
+    MouseWheel="Control_MouseWheel"
     mc:Ignorable="d">
 
     <!--#region Ressources-->
@@ -68,7 +68,7 @@
             <Separator />
             <MenuItem
                 x:Name="CopyHexaCMenu"
-                Click="CopyHexaCMenu_Click"
+                Click="CopyToClipBoardCMenu_Click"
                 Header="{x:Static p:Resources.CopyAsHexadecimalString}">
                 <MenuItem.Icon>
                     <Image Source="/WPFHexaEditor;component/Resources/Icon/Copy-Icon.ico" />
@@ -76,7 +76,7 @@
             </MenuItem>
             <MenuItem
                 x:Name="CopyAsciicMenu"
-                Click="CopyASCIICMenu_Click"
+                Click="CopyToClipBoardCMenu_Click"
                 Header="{x:Static p:Resources.CopyAsASCIIString}">
                 <MenuItem.Icon>
                     <Image Source="/WPFHexaEditor;component/Resources/Icon/Copy-Icon.ico" />
@@ -85,27 +85,31 @@
             <MenuItem x:Name="CopyAsCMenu" Header="{x:Static p:Resources.CopySelectionAsString}">
                 <MenuItem
                     x:Name="CopyCcMenu"
-                    Click="CopyCCMenu_Click"
+                    Click="CopyToClipBoardCMenu_Click"
                     Header="C" />
                 <MenuItem
                     x:Name="CopyCSharpCMenu"
-                    Click="CopyCSharpCMenu_Click"
+                    Click="CopyToClipBoardCMenu_Click"
                     Header="C#" />
                 <MenuItem
                     x:Name="CopyFSharpCMenu"
-                    Click="CopyFSharpCMenu_Click"
+                    Click="CopyToClipBoardCMenu_Click"
                     Header="F#" />
                 <MenuItem
                     x:Name="CopyJavaCMenu"
-                    Click="CopyJavaCMenu_Click"
+                    Click="CopyToClipBoardCMenu_Click"
                     Header="Java" />
                 <MenuItem
                     x:Name="CopyVbNetCMenu"
-                    Click="CopyVBNetCMenu_Click"
+                    Click="CopyToClipBoardCMenu_Click"
                     Header="Visual Basic.Net" />
                 <MenuItem
+                    x:Name="CopyPascalCMenu"
+                    Click="CopyToClipBoardCMenu_Click"
+                    Header="Pascal" />
+                <MenuItem
                     x:Name="CopyTblcMenu"
-                    Click="CopyTBLCMenu_Click"
+                    Click="CopyToClipBoardCMenu_Click"
                     Header="{x:Static p:Resources.CopyAsTBLString}" />
             </MenuItem>
             <Separator />
@@ -165,7 +169,7 @@
         x:Name="BaseGrid"
         Background="White"
         SizeChanged="Grid_SizeChanged">
-        
+
         <!--#region Grid/Column Definitions-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -218,12 +222,12 @@
             VerticalAlignment="Top"
             Background="WhiteSmoke"
             Visibility="Visible">
-            
+
             <Separator
                 Height="1"
                 Margin="0,0,0,27"
                 Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HexEditor}}, Path=BorderBrush}" />
-            
+
             <StatusBar Height="27">
                 <StatusBarItem Width="90" Padding="0">
                     <StackPanel Orientation="Horizontal">
@@ -231,12 +235,12 @@
                             Padding="5,5,0,5"
                             Content="{x:Static p:Resources.LineStatusBarTagString}"
                             FontWeight="Bold" />
-                        <Label Content="{Binding (local:HexEditor.SelectionLine), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}">
+                        <Label Content="{Binding SelectionLine, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}">
                             <Label.ToolTip>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="Line :" FontWeight="Bold" />
-                                    <Label Content="{Binding (local:HexEditor.SelectionLine), UpdateSourceTrigger=PropertyChanged}" />
-                                    <Label Content="{Binding (local:HexEditor.SelectionLine), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}" />
+                                    <Label Content="{Binding SelectionLine, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Label Content="{Binding SelectionLine, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}" />
                                 </StackPanel>
                             </Label.ToolTip>
                         </Label>
@@ -249,12 +253,12 @@
                             Padding="5,5,0,5"
                             Content="{x:Static p:Resources.PositionString}"
                             FontWeight="Bold" />
-                        <Label Content="{Binding (local:HexEditor.SelectionStart), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}">
+                        <Label Content="{Binding SelectionStart, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}">
                             <Label.ToolTip>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{x:Static p:Resources.PositionString}" FontWeight="Bold" />
-                                    <Label Content="{Binding (local:HexEditor.SelectionStart), UpdateSourceTrigger=PropertyChanged}" />
-                                    <Label Content="{Binding (local:HexEditor.SelectionStart), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}" />
+                                    <Label Content="{Binding SelectionStart, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Label Content="{Binding SelectionStart, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}" />
                                 </StackPanel>
                             </Label.ToolTip>
                         </Label>
@@ -301,19 +305,7 @@
             HorizontalAlignment="Right"
             Content="ReadOnly"
             FontWeight="Bold"
-            Visibility="{Binding (local:HexEditor.ReadOnlyMode), Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-
-        <Label
-            x:Name="TblLabel"
-            Grid.Row="2"
-            Grid.RowSpan="2"
-            Grid.Column="2"
-            Grid.ColumnSpan="2"
-            Margin="0,1,05,1"
-            HorizontalAlignment="Right"
-            Content="{x:Static p:Resources.TBLString}"
-            FontWeight="Bold"
-            Visibility="Collapsed" />
+            Visibility="{Binding ReadOnlyMode, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
         <!--#endregion-->
 
         <!--#region Scrollbar, marker, and move rectangle-->
@@ -338,12 +330,12 @@
         <Rectangle
             x:Name="BottomRectangle"
             Grid.Row="2"
-            Grid.Column="1"
+            Grid.Column="0"
             Grid.ColumnSpan="4"
-            Height="25"
-            Margin="0,0,18,0"
+            Height="10"
             VerticalAlignment="Bottom"
             Fill="#FFF4F4F5"
+            MouseDown="BottomRectangle_MouseDown"
             MouseEnter="BottomRectangle_MouseEnter"
             MouseLeave="BottomRectangle_MouseLeave"
             Opacity="0" />
@@ -353,9 +345,10 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="4"
-            Height="30"
+            Height="10"
             VerticalAlignment="Top"
             Fill="#FFF4F4F5"
+            MouseDown="TopRectangle_MouseDown"
             MouseEnter="TopRectangle_MouseEnter"
             MouseLeave="TopRectangle_MouseLeave"
             Opacity="0" />
@@ -393,6 +386,17 @@
                 Opacity="0.9"
                 ToolTip="{x:Static p:Resources.CancelLongProcessToolTipString}" />
         </Border>
+        <Label
+            x:Name="TblLabel"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Margin="0,1,05,1"
+            HorizontalAlignment="Right"
+            Content="{x:Static p:Resources.TBLString}"
+            FontWeight="Bold"
+            Visibility="Collapsed" />
         <!--#endregion-->
 
     </Grid>

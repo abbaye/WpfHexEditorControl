@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WpfHexaEditor</RootNamespace>
     <AssemblyName>WPFHexaEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -49,10 +49,6 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -63,6 +59,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseByte.cs" />
     <Compile Include="Core\Caret.cs" />
     <Compile Include="Core\Interfaces\IByteModified.cs" />
     <Compile Include="Core\CharacterTable\DTE.cs" />
@@ -76,6 +73,12 @@
     <Compile Include="Core\SerializerHelper.cs" />
     <Compile Include="Core\MethodExtention\StringExtension.cs" />
     <Compile Include="Core\Native\NativeMethods.cs" />
+    <Compile Include="Dialog\FindWindow.xaml.cs">
+      <DependentUpon>FindWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\FindReplaceWindow.xaml.cs">
+      <DependentUpon>FindReplaceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\GiveByteWindow.xaml.cs">
       <DependentUpon>GiveByteWindow.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.fr-CA.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.pl-PL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.pl-PL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.pt-BR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.pt-BR.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +116,14 @@
       <DependentUpon>Resources.zh-CN.resx</DependentUpon>
     </Compile>
     <Compile Include="StringByte.cs" />
+    <Page Include="Dialog\FindWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\FindReplaceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialog\ReplaceByteWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -161,6 +182,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.pl-PL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.pl-PL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pt-BR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.pt-BR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -178,12 +207,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.zh-CN1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\EBCDIC.tbl" />
+    <None Include="Resources\EBCDIC-NoSpecialChar.tbl" />
     <None Include="WPFHexaEditor.ruleset" />
   </ItemGroup>
   <ItemGroup>

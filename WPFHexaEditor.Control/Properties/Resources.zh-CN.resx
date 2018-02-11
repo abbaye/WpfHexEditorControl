@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppendByteConfirmationString" xml:space="preserve">
-    <value>你已经到达文件的末尾。 你想要追加一个字节吗？ 如果继续，此操作无法取消。</value>
+    <value>已到达文件末尾，你想要追加一个字节吗？ 继续将无法取消此操作。</value>
   </data>
   <data name="BookmarksString" xml:space="preserve">
     <value>标记</value>
@@ -141,8 +141,14 @@
   <data name="ClearBookMarkString" xml:space="preserve">
     <value>清除标记</value>
   </data>
+  <data name="ClearString" xml:space="preserve">
+    <value>明确</value>
+  </data>
   <data name="ClickToGoAtPositionString" xml:space="preserve">
     <value>点击以跳转</value>
+  </data>
+  <data name="CloseString" xml:space="preserve">
+    <value>关闭</value>
   </data>
   <data name="CopyAsASCIIString" xml:space="preserve">
     <value>ASCII</value>
@@ -178,19 +184,40 @@
     <value>请输入十六进制值</value>
   </data>
   <data name="FileDroppingConfirmationString" xml:space="preserve">
-    <value>你想关闭当前文件并打开它 ：</value>
+    <value>你想关闭当前文件并打开：</value>
   </data>
   <data name="FillSelectionAloneString" xml:space="preserve">
-    <value>用字节填充选择</value>
+    <value>填充选定区域(字节)</value>
   </data>
   <data name="FillSelectionString" xml:space="preserve">
-    <value>填充选定为</value>
+    <value>填充选定区域(字节)</value>
+  </data>
+  <data name="FindAllString" xml:space="preserve">
+    <value>找到所有</value>
+  </data>
+  <data name="FindAndReplaceString" xml:space="preserve">
+    <value>查找和替换</value>
   </data>
   <data name="FindByteString" xml:space="preserve">
     <value>搜索的字节值</value>
   </data>
+  <data name="FindFirstString" xml:space="preserve">
+    <value>查找首个</value>
+  </data>
+  <data name="FindLastString" xml:space="preserve">
+    <value>查找最后一个</value>
+  </data>
+  <data name="FindNextString" xml:space="preserve">
+    <value>查找下一个</value>
+  </data>
   <data name="FindSelectionString" xml:space="preserve">
-    <value>寻找</value>
+    <value>查找选定的字符串</value>
+  </data>
+  <data name="FindString" xml:space="preserve">
+    <value>查找</value>
+  </data>
+  <data name="FindWhatString" xml:space="preserve">
+    <value>查找：</value>
   </data>
   <data name="FirstByteString" xml:space="preserve">
     <value>首字节</value>
@@ -220,7 +247,7 @@
     <value>确定</value>
   </data>
   <data name="PasteExtendByteConfirmationString" xml:space="preserve">
-    <value>粘贴操作到达文件的末尾。 你想扩展文件的完整操作吗？ 如果你继续，这个操作不能被取消。</value>
+    <value>粘贴操作到达文件的末尾。 你想扩展文件的完整操作吗？ 继续将无法取消此操作。</value>
   </data>
   <data name="PasteFromClipboardString" xml:space="preserve">
     <value>从剪贴板粘贴</value>
@@ -231,14 +258,26 @@
   <data name="PositionString" xml:space="preserve">
     <value>位置</value>
   </data>
+  <data name="ReplaceAllString" xml:space="preserve">
+    <value>全部替换</value>
+  </data>
   <data name="ReplaceByByteString" xml:space="preserve">
     <value>替换字节</value>
+  </data>
+  <data name="ReplaceNextString" xml:space="preserve">
+    <value>替换下一个</value>
   </data>
   <data name="ReplaceSelectionString" xml:space="preserve">
     <value>替换选中的字符串</value>
   </data>
+  <data name="ReplaceString" xml:space="preserve">
+    <value>更替</value>
+  </data>
   <data name="ReplaceWithByteString" xml:space="preserve">
     <value>用字节替换</value>
+  </data>
+  <data name="ReplaceWithString" xml:space="preserve">
+    <value>用字符串替换：</value>
   </data>
   <data name="SelectAllString" xml:space="preserve">
     <value>全选</value>

@@ -121,9 +121,102 @@ namespace WpfHexaEditor.Core.CharacterTable
         }
 
         /// <summary>
+        /// Chargé la chaine dans l'objet
+        /// </summary>
+        private void Load(string tblString)
+        {
+            //Vide la collection
+            _dteList.Clear();
+            //ouverture du fichier
+
+            //lecture du fichier jusqua la fin et séparation par ligne
+            char[] sepEndLine = {'\n'}; //Fin de ligne
+            char[] sepEqual = {'='}; //Fin de ligne
+
+            //build strings line
+            var textFromString = new StringBuilder(tblString);
+            textFromString.Insert(textFromString.Length, new[] {'\r', '\n'});
+            var lines = textFromString.ToString().Split(sepEndLine);
+
+            //remplir la collection de DTE : this._DTE
+            foreach (var line in lines)
+            {
+                var info = line.Split(sepEqual);
+
+                //ajout a la collection (ne prend pas encore en charge le Japonais)
+                Dte dte;
+                try
+                {
+                    switch (info[0].Length)
+                    {
+                        case 2:
+                            dte = info[1].Length == 2
+                                ? new Dte(info[0], info[1].Substring(0, info[1].Length - 1), DteType.Ascii)
+                                : new Dte(info[0], info[1].Substring(0, info[1].Length - 1),
+                                    DteType.DualTitleEncoding);
+                            break;
+                        case 4: // >2
+                            dte = new Dte(info[0], info[1].Substring(0, info[1].Length - 1),
+                                DteType.MultipleTitleEncoding);
+                            break;
+                        default:
+                            continue;
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    switch (info[0].Substring(0, 1))
+                    {
+                        case @"/":
+                            dte = new Dte(info[0].Substring(0, info[0].Length - 1), string.Empty, DteType.EndBlock);
+                            break;
+
+                        case @"*":
+                            dte = new Dte(info[0].Substring(0, info[0].Length - 1), string.Empty, DteType.EndLine);
+                            break;
+                        //case @"\":
+                        default:
+                            continue;
+                    }
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    //Du a une entre qui a 2 = de suite... EX:  XX==
+                    dte = new Dte(info[0], "=", DteType.DualTitleEncoding);
+                }
+
+                _dteList.Add(dte.Entry, dte);
+            }
+
+            //Load bookmark
+            BookMarks.Clear();
+            foreach (var line in lines)
+            {
+                try
+                {
+                    if (line.Substring(0, 1) == "(")
+                    {
+                        var fav = new BookMark();
+                        var lineSplited = line.Split(')');
+                        fav.Description = lineSplited[1].Substring(0, lineSplited[1].Length - 1);
+
+                        lineSplited = line.Split('h');
+                        fav.BytePositionInFile = ByteConverters
+                            .HexLiteralToLong(lineSplited[0].Substring(1, lineSplited[0].Length - 1)).position;
+                        fav.Marker = ScrollMarker.TblBookmark;
+                        BookMarks.Add(fav);
+                    }
+                }
+                catch
+                {
+                    //Nothing to add if error
+                }
+            }
+        }
+
+        /// <summary>
         /// Chargé le fichier dans l'objet
         /// </summary>
-        /// <returns>Retoune vrai si le fichier est bien charger</returns>
         private void Load()
         {
             //Vide la collection
@@ -147,93 +240,9 @@ namespace WpfHexaEditor.Core.CharacterTable
             }
 
             if (tblFile.BaseStream.CanRead)
-            {
-                //lecture du fichier jusqua la fin et séparation par ligne
-                char[] sepEndLine = {'\n'}; //Fin de ligne
-                char[] sepEqual = {'='}; //Fin de ligne
+                Load(tblFile.ReadToEnd());
 
-                //build strings line
-                var textFromFile = new StringBuilder(tblFile.ReadToEnd());
-                textFromFile.Insert(textFromFile.Length, new[] {'\r', '\n'});
-                var lines = textFromFile.ToString().Split(sepEndLine);
-
-                //remplir la collection de DTE : this._DTE
-                foreach (var line in lines)
-                {
-                    var info = line.Split(sepEqual);
-
-                    //ajout a la collection (ne prend pas encore en charge le Japonais)
-                    Dte dte;
-                    try
-                    {
-                        switch (info[0].Length)
-                        {
-                            case 2:
-                                dte = info[1].Length == 2
-                                    ? new Dte(info[0], info[1].Substring(0, info[1].Length - 1), DteType.Ascii)
-                                    : new Dte(info[0], info[1].Substring(0, info[1].Length - 1),
-                                        DteType.DualTitleEncoding);
-                                break;
-                            case 4: // >2
-                                dte = new Dte(info[0], info[1].Substring(0, info[1].Length - 1),
-                                    DteType.MultipleTitleEncoding);
-                                break;
-                            default:
-                                continue;
-                        }
-                    }
-                    catch (IndexOutOfRangeException)
-                    {
-                        switch (info[0].Substring(0, 1))
-                        {
-                            case @"/":
-                                dte = new Dte(info[0].Substring(0, info[0].Length - 1), string.Empty, DteType.EndBlock);
-                                break;
-
-                            case @"*":
-                                dte = new Dte(info[0].Substring(0, info[0].Length - 1), string.Empty, DteType.EndLine);
-                                break;
-                            //case @"\":
-                            default:
-                                continue;
-                        }
-                    }
-                    catch (ArgumentOutOfRangeException)
-                    {
-                        //Du a une entre qui a 2 = de suite... EX:  XX==
-                        dte = new Dte(info[0], "=", DteType.DualTitleEncoding);
-                    }
-
-                    _dteList.Add(dte.Entry, dte);
-                }
-
-                //Load bookmark
-                BookMarks.Clear();
-                foreach (var line in lines)
-                {
-                    try
-                    {
-                        if (line.Substring(0, 1) == "(")
-                        {
-                            var fav = new BookMark();
-                            var lineSplited = line.Split(')');
-                            fav.Description = lineSplited[1].Substring(0, lineSplited[1].Length - 1);
-
-                            lineSplited = line.Split('h');
-                            fav.BytePositionInFile = ByteConverters
-                                .HexLiteralToLong(lineSplited[0].Substring(1, lineSplited[0].Length - 1)).position;
-                            fav.Marker = ScrollMarker.TblBookmark;
-                            BookMarks.Add(fav);
-                        }
-                    }
-                    catch
-                    {
-                        //Nothing to add if error
-                    }
-                }
-
-                tblFile.Close();
-            }
+            tblFile.Close();
         }
 
         /// <summary>
@@ -386,7 +395,7 @@ namespace WpfHexaEditor.Core.CharacterTable
 
         #region Build default TBL
 
-        public static TblStream CreateDefaultAscii(DefaultCharacterTableType type = DefaultCharacterTableType.Ascii)
+        public static TblStream CreateDefaultTbl(DefaultCharacterTableType type = DefaultCharacterTableType.Ascii)
         {
             var tbl = new TblStream();
 
@@ -394,10 +403,13 @@ namespace WpfHexaEditor.Core.CharacterTable
             {
                 case DefaultCharacterTableType.Ascii:
                     for (byte i = 0; i < 255; i++)
-                    {
-                        var dte = new Dte(ByteConverters.ByteToHex(i).ToUpper(), $"{ByteConverters.ByteToChar(i)}");
-                        tbl.Add(dte);
-                    }
+                        tbl.Add(new Dte(ByteConverters.ByteToHex(i).ToUpper(), $"{ByteConverters.ByteToChar(i)}"));
+                    break;
+                case DefaultCharacterTableType.EbcdicWithSpecialChar:
+                    tbl.Load(Properties.Resources.EBCDIC);
+                    break;
+                case DefaultCharacterTableType.EbcdicNoSpecialChar:
+                    tbl.Load(Properties.Resources.EBCDICNoSpecialChar);
                     break;
             }
 

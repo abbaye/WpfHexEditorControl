@@ -1,9 +1,8 @@
 ﻿//////////////////////////////////////////////
-// Apache 2.0  - 2016-2017
+// Apache 2.0  - 2016-2018
 // Author : Derek Tremblay (derektremblay666@gmail.com)
 //////////////////////////////////////////////
 
-using System.Globalization;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows;
@@ -11,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WpfHexaEditor.Core;
 using WpfHexaEditor.Core.Bytes;
+using WpfHexaEditor.Core.CharacterTable;
+using WpfHexaEditor.Dialog;
 using WPFHexaEditorExample.Properties;
 
 namespace WPFHexaEditorExample
@@ -29,7 +30,7 @@ namespace WPFHexaEditorExample
 
         public MainWindow()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
 
             InitializeComponent();
           
@@ -231,9 +232,6 @@ namespace WPFHexaEditorExample
 
             HexEdit.TypeOfCharacterTable = CharacterTableType.TblFile;
             HexEdit.LoadDefaultTbl();
-            CTableAsciiButton.IsChecked = false;
-            CTableTblButton.IsChecked = false;
-            CTableTblDefaultAsciiButton.IsChecked = true;
 
             Application.Current.MainWindow.Cursor = null;
         }
@@ -248,8 +246,64 @@ namespace WPFHexaEditorExample
 
         private void TESTMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            ///// SAVE STATE TEST
             //HexEdit.SaveCurrentState("test.xml");
             //HexEdit.LoadCurrentState("test.xml");
+
+            #region REFRESH RATE TEST
+            //var rnd = new Random();
+            //for (var i = 0; i < 200; i++)
+            //{
+            //    HexEdit.SetPosition(rnd.Next(0, (int)HexEdit.Lenght));
+            //    //HexEdit.BytePerLine = rnd.Next(1, 16);
+            //    Application.Current.DoEvents();
+            //}
+            #endregion
+
+            ///// BYTE SHIFTING TEST FOR FIXED LENGHT EDITOR
+            //HexEdit.ByteShiftLeft = 9;
+            //HexEdit.RefreshView(true);
+            //HexEdit.BytePerLine = 9;
+
+            //HexEdit.ReverseSelection();
+        }
+
+        private void CTableTblDefaultEBCDICButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Cursor = Cursors.Wait;
+
+            HexEdit.TypeOfCharacterTable = CharacterTableType.TblFile;
+            HexEdit.LoadDefaultTbl(DefaultCharacterTableType.EbcdicWithSpecialChar);
+
+            Application.Current.MainWindow.Cursor = null;
+        }
+
+        private void CTableTblDefaultEBCDICNoSPButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Cursor = Cursors.Wait;
+
+            HexEdit.TypeOfCharacterTable = CharacterTableType.TblFile;
+            HexEdit.LoadDefaultTbl(DefaultCharacterTableType.EbcdicNoSpecialChar);
+
+            Application.Current.MainWindow.Cursor = null;
+        }
+
+        private void FindMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new FindWindow(HexEdit)
+            {
+                Owner = this
+            };
+            window.Show();
+        }
+
+        private void ReplaceMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new FindReplaceWindow(HexEdit)
+            {
+                Owner = this
+            };
+            window.Show();
         }
     }
 }

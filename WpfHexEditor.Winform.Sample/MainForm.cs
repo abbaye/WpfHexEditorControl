@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows.Media;
 using WpfHexaEditor.Core;
 
 namespace WpfHexEditor.Winform.Sample
@@ -10,6 +11,8 @@ namespace WpfHexEditor.Winform.Sample
         public MainForm()
         {
             InitializeComponent();
+
+            hexEditor.ForegroundSecondColor = Brushes.Blue;
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)

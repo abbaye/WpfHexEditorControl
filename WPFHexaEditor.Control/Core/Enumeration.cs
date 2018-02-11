@@ -1,5 +1,5 @@
 ﻿//////////////////////////////////////////////
-// Apache 2.0  - 2016-2017
+// Apache 2.0  - 2016-2018
 // Author : Derek Tremblay (derektremblay666@gmail.com)
 //////////////////////////////////////////////
 
@@ -43,7 +43,8 @@ namespace WpfHexaEditor.Core
         VbNetCode,
         JavaCode,
         CCode,
-        FSharp
+        FSharpCode,
+        PascalCode
     }
 
     /// <summary>
@@ -55,7 +56,8 @@ namespace WpfHexaEditor.Core
         CSharp,
         Java,
         FSharp,
-        Vbnet
+        Vbnet,
+        Pascal
     }
 
     /// <summary>
@@ -152,7 +154,8 @@ namespace WpfHexaEditor.Core
     {
         HexBytePanel,
         StringBytePanel,
-        Both
+        Both,
+        Nothing
     }
 
     public enum ByteSpacerVisual

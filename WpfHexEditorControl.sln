@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHexaEditor", "WPFHexaEditor.Control\WpfHexaEditor.csproj", "{CF6AC02D-02FA-4EE9-A507-BD94F489972E}"
 EndProject
@@ -11,7 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHexEditor.Sample.Winform
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WpfHexEditor.Sample.VB", "WpfHexEditor.Sample.VB\WpfHexEditor.Sample.VB.vbproj", "{4A0357E6-BF23-4CBA-9AE8-9D451F978EE6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{16FE1BF4-C9FE-4D77-B0AE-8803E7077DC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHexEditor.UnitTest", "WpfHexEditor.UnitTest\WpfHexEditor.UnitTest.csproj", "{004B0EDC-CEFD-4745-B51C-E99B53A41165}"
+EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -33,9 +40,18 @@ Global
 		{4A0357E6-BF23-4CBA-9AE8-9D451F978EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A0357E6-BF23-4CBA-9AE8-9D451F978EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A0357E6-BF23-4CBA-9AE8-9D451F978EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{004B0EDC-CEFD-4745-B51C-E99B53A41165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{004B0EDC-CEFD-4745-B51C-E99B53A41165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{004B0EDC-CEFD-4745-B51C-E99B53A41165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{004B0EDC-CEFD-4745-B51C-E99B53A41165}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{001BD673-EF33-4FD2-AB7F-57F40FD54D53} = {16FE1BF4-C9FE-4D77-B0AE-8803E7077DC6}
+		{326EED14-1180-46CC-8583-E6A249A248B6} = {16FE1BF4-C9FE-4D77-B0AE-8803E7077DC6}
+		{4A0357E6-BF23-4CBA-9AE8-9D451F978EE6} = {16FE1BF4-C9FE-4D77-B0AE-8803E7077DC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B382CAE-4846-466E-A3D3-0842043B4012}

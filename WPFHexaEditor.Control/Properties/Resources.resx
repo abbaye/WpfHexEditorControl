@@ -141,8 +141,14 @@
   <data name="ClearBookMarkString" xml:space="preserve">
     <value>Clear bookmark</value>
   </data>
+  <data name="ClearString" xml:space="preserve">
+    <value>Clear</value>
+  </data>
   <data name="ClickToGoAtPositionString" xml:space="preserve">
     <value>Click to go to at position.</value>
+  </data>
+  <data name="CloseString" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="CopyAsASCIIString" xml:space="preserve">
     <value>Copy as ASCII</value>
@@ -171,6 +177,13 @@
   <data name="DescriptionString" xml:space="preserve">
     <value>Description</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="EBCDIC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EBCDIC.tbl;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;us-ascii</value>
+  </data>
+  <data name="EBCDICNoSpecialChar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EBCDIC-NoSpecialChar.tbl;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="EndTagString" xml:space="preserve">
     <value>&lt;end&gt;</value>
   </data>
@@ -186,11 +199,32 @@
   <data name="FillSelectionString" xml:space="preserve">
     <value>Fill selection with byte...</value>
   </data>
+  <data name="FindAllString" xml:space="preserve">
+    <value>Find All</value>
+  </data>
+  <data name="FindAndReplaceString" xml:space="preserve">
+    <value>Find and Replace</value>
+  </data>
   <data name="FindByteString" xml:space="preserve">
     <value>Byte to search</value>
   </data>
+  <data name="FindFirstString" xml:space="preserve">
+    <value>Find First</value>
+  </data>
+  <data name="FindLastString" xml:space="preserve">
+    <value>Find Last</value>
+  </data>
+  <data name="FindNextString" xml:space="preserve">
+    <value>Find Next</value>
+  </data>
   <data name="FindSelectionString" xml:space="preserve">
     <value>Find all occurence of selection</value>
+  </data>
+  <data name="FindString" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="FindWhatString" xml:space="preserve">
+    <value>Find what:</value>
   </data>
   <data name="FirstByteString" xml:space="preserve">
     <value>First byte</value>
@@ -231,14 +265,26 @@
   <data name="PositionString" xml:space="preserve">
     <value>Position</value>
   </data>
+  <data name="ReplaceAllString" xml:space="preserve">
+    <value>Replace All</value>
+  </data>
   <data name="ReplaceByByteString" xml:space="preserve">
     <value>Replace by byte</value>
+  </data>
+  <data name="ReplaceNextString" xml:space="preserve">
+    <value>Replace Next</value>
   </data>
   <data name="ReplaceSelectionString" xml:space="preserve">
     <value>Replace byte in selection...</value>
   </data>
+  <data name="ReplaceString" xml:space="preserve">
+    <value>Replace</value>
+  </data>
   <data name="ReplaceWithByteString" xml:space="preserve">
     <value>Replace with byte</value>
+  </data>
+  <data name="ReplaceWithString" xml:space="preserve">
+    <value>Replace with:</value>
   </data>
   <data name="SelectAllString" xml:space="preserve">
     <value>Select all</value>

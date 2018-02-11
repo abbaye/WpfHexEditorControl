@@ -21,8 +21,9 @@ namespace WpfHexaEditor.Core.MethodExtention
             fontSize = fontSize > 0 ? fontSize : new TextBlock().FontSize;
 
             var typeface = new Typeface(fontFamily, fontStyle, fontWeight, fontStretch);
-            var ft = new FormattedText(text ?? string.Empty, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                typeface, fontSize, Brushes.Black);
+#pragma warning disable CS0618 // Le type ou le membre est obsolète
+            var ft = new FormattedText(text ?? string.Empty, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, Brushes.Black);
+#pragma warning restore CS0618 // Le type ou le membre est obsolète
 
             return new Size(ft.Width, ft.Height);
         }

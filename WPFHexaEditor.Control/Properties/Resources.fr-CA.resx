@@ -261,4 +261,43 @@
   <data name="PasteExtendByteConfirmationString" xml:space="preserve">
     <value>L'opération de collage a atteint la fin du fichier. Voulez-vous étendre le fichier pour une opération complète? Cette opération ne peut pas être annulée si vous continuez.</value>
   </data>
+  <data name="ClearString" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="CloseString" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="FindAllString" xml:space="preserve">
+    <value>Tout</value>
+  </data>
+  <data name="FindAndReplaceString" xml:space="preserve">
+    <value>Rechercher et Remplacer</value>
+  </data>
+  <data name="FindFirstString" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="FindLastString" xml:space="preserve">
+    <value>Dernier</value>
+  </data>
+  <data name="FindNextString" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="FindString" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="FindWhatString" xml:space="preserve">
+    <value>Rechercher quoi:</value>
+  </data>
+  <data name="ReplaceAllString" xml:space="preserve">
+    <value>Remplacer tout</value>
+  </data>
+  <data name="ReplaceNextString" xml:space="preserve">
+    <value>Remplacer suivant</value>
+  </data>
+  <data name="ReplaceString" xml:space="preserve">
+    <value>Remplacer</value>
+  </data>
+  <data name="ReplaceWithString" xml:space="preserve">
+    <value>Remplacer par :</value>
+  </data>
 </root>
