@@ -28,11 +28,11 @@ using Path = System.IO.Path;
 
 namespace WpfHexaEditor
 {
-    /// <summary> 
+    /// <summary>
     /// Wpf HexEditor control implementation
     /// </summary>
     /// <remarks>
-    /// Wpf Hexeditor is a fast and fully customisable user control for editing file or stream as hexadecimal. 
+    /// Wpf Hexeditor is a fast and fully customisable user control for editing file or stream as hexadecimal.
     /// Can be used in Wpf or WinForm application
     /// </remarks>
     public partial class HexEditor : IDisposable
@@ -70,13 +70,13 @@ namespace WpfHexaEditor
         private long[] _bytecount;
 
         /// <summary>
-        /// Save the view byte buffer as a field. 
+        /// Save the view byte buffer as a field.
         /// To save the time when Scolling i do not building them every time when scolling.
         /// </summary>
         private byte[] _viewBuffer;
 
         /// <summary>
-        /// Save the view byte buffer position as a field. 
+        /// Save the view byte buffer position as a field.
         /// To save the time when Scolling i do not building them every time when scolling.
         /// </summary>
         private long[] _viewBufferBytePosition;
@@ -397,7 +397,7 @@ namespace WpfHexaEditor
         /// Get or set the byte deleted colors
         /// </summary>
         /// <remarks>
-        /// Visible only when HideByteDelete are set to false 
+        /// Visible only when HideByteDelete are set to false
         /// </remarks>
         public Brush ByteDeletedColor
         {
@@ -577,7 +577,7 @@ namespace WpfHexaEditor
                 new PropertyMetadata("Wpf HexEditor"));
 
         /// <summary>
-        /// Height of data line. 
+        /// Height of data line.
         /// </summary>
         public double LineHeight
         {
@@ -666,7 +666,7 @@ namespace WpfHexaEditor
         }
 
         /// <summary>
-        /// Get or set the visual data format of HexByte 
+        /// Get or set the visual data format of HexByte
         /// </summary>
         public DataVisualType DataStringVisual
         {
@@ -1851,7 +1851,7 @@ namespace WpfHexaEditor
         }
 
         /// <summary>
-        /// Clear the scroll marker when undone 
+        /// Clear the scroll marker when undone
         /// </summary>
         /// <param name="sender">List of long representing position in file are undone</param>
         private void Provider_Undone(object sender, EventArgs e)
@@ -1943,14 +1943,14 @@ namespace WpfHexaEditor
         /// <summary>
         /// Set the MemoryStream are used by ByteProvider
         /// </summary>
-        public MemoryStream Stream
+        public Stream Stream
         {
-            get => (MemoryStream)GetValue(StreamProperty);
+            get => (Stream)GetValue(StreamProperty);
             set => SetValue(StreamProperty, value);
         }
 
         public static readonly DependencyProperty StreamProperty =
-            DependencyProperty.Register(nameof(Stream), typeof(MemoryStream), typeof(HexEditor),
+            DependencyProperty.Register(nameof(Stream), typeof(Stream), typeof(HexEditor),
                 new FrameworkPropertyMetadata(null,
                     Stream_PropertyChanged));
 
@@ -1959,7 +1959,7 @@ namespace WpfHexaEditor
             if (!(d is HexEditor ctrl)) return;
 
             ctrl.CloseProvider();
-            ctrl.OpenStream((MemoryStream)e.NewValue);
+            ctrl.OpenStream((Stream)e.NewValue);
         }
 
         /// <summary>
@@ -2065,7 +2065,7 @@ namespace WpfHexaEditor
         /// <summary>
         /// Open stream
         /// </summary>
-        private void OpenStream(MemoryStream stream)
+        private void OpenStream(Stream stream)
         {
             if (!stream.CanRead) return;
 
@@ -2407,7 +2407,7 @@ namespace WpfHexaEditor
                 c.Visibility = Visibility.Collapsed;
 
                 if (!CheckIsOpen(_provider)) return;
-                
+
                 c.Visibility = Visibility.Visible;
                 c.SmallChange = 1;
                 c.LargeChange = ScrollLargeChange;
@@ -2826,7 +2826,7 @@ namespace WpfHexaEditor
         {
             if (_markedPositionList.Count > 0)
                 TraverseHexAndStringBytes(ctrl => ctrl.IsHighLight = _markedPositionList.ContainsKey(ctrl.BytePositionInStream));
-            else //Un highlight all            
+            else //Un highlight all
                 TraverseHexAndStringBytes(ctrl => ctrl.IsHighLight = false);
         }
 
@@ -3252,7 +3252,7 @@ namespace WpfHexaEditor
 
                     SetScrollMarker(position, ScrollMarker.SearchHighLight);
                 }
-                
+
                 UnSelectAll();
                 UpdateHighLight();
 
@@ -3290,7 +3290,7 @@ namespace WpfHexaEditor
         }
 
         /// <summary>
-        /// Replace the first byte array define by findData in byteprovider at start position. 
+        /// Replace the first byte array define by findData in byteprovider at start position.
         /// </summary>
         /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
         public long ReplaceFirst(byte[] findData, byte[] replaceData, bool truckLength = true, long startPosition = 0, bool hightlight = false)
@@ -3320,15 +3320,15 @@ namespace WpfHexaEditor
         }
 
         /// <summary>
-        /// Replace the first byte array define by findData in byteprovider at SelectionStart. Start the search at SelectionStart. 
+        /// Replace the first byte array define by findData in byteprovider at SelectionStart. Start the search at SelectionStart.
         /// </summary>
         /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
         public long ReplaceFirst(byte[] findData, byte[] replaceData, bool truckLength = true, bool hightlight = false) =>
             ReplaceFirst(findData, replaceData, truckLength, SelectionStart, hightlight);
 
         /// <summary>
-        /// Replace the first byte array define by findData in byteprovider at SelectionStart. 
-        /// Start the search at SelectionStart. 
+        /// Replace the first byte array define by findData in byteprovider at SelectionStart.
+        /// Start the search at SelectionStart.
         /// No highlight
         /// </summary>
         /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
@@ -3336,8 +3336,8 @@ namespace WpfHexaEditor
             ReplaceFirst(findData, replaceData, truckLength, SelectionStart, false);
 
         /// <summary>
-        /// Replace the first byte array define by findData in byteprovider at SelectionStart. 
-        /// Start the search at SelectionStart. 
+        /// Replace the first byte array define by findData in byteprovider at SelectionStart.
+        /// Start the search at SelectionStart.
         /// No highlight
         /// Truck replace data to length of findData
         /// </summary>
@@ -3346,40 +3346,40 @@ namespace WpfHexaEditor
             ReplaceFirst(findData, replaceData, true, SelectionStart, false);
 
         /// <summary>
-        /// Replace the first string define by find in byteprovider at SelectionStart. Start the search at SelectionStart. 
+        /// Replace the first string define by find in byteprovider at SelectionStart. Start the search at SelectionStart.
         /// </summary>
         /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
         public long ReplaceFirst(string find, string replace, bool truckLength = true, bool hightlight = false) =>
             ReplaceFirst(StringToByte(find), StringToByte(replace), truckLength, SelectionStart, hightlight);
 
         /// <summary>
-        /// Replace the first string define by find in byteprovider at SelectionStart. 
-        /// Start the search at SelectionStart. 
+        /// Replace the first string define by find in byteprovider at SelectionStart.
+        /// Start the search at SelectionStart.
         /// No highlight
         /// </summary>
-        /// <returns>Return the position of replace. Return -1 on error/no replace</returns>        
+        /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
         public long ReplaceFirst(string find, string replace, bool truckLength = true) =>
             ReplaceFirst(StringToByte(find), StringToByte(replace), truckLength, SelectionStart, false);
 
         /// <summary>
-        /// Replace the first string define by find in byteprovider at start position. 
-        /// Start the search at SelectionStart. 
+        /// Replace the first string define by find in byteprovider at start position.
+        /// Start the search at SelectionStart.
         /// No highlight
         /// Truck replace data to length of findData
         /// </summary>
-        /// <returns>Return the position of replace. Return -1 on error/no replace</returns>        
+        /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
         public long ReplaceFirst(string find, string replace) =>
             ReplaceFirst(StringToByte(find), StringToByte(replace), true, SelectionStart, false);
 
         /// <summary>
-        /// Replace the next byte array define by findData in byteprovider at SelectionStart. 
+        /// Replace the next byte array define by findData in byteprovider at SelectionStart.
         /// </summary>
         /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
         public long ReplaceNext(byte[] findData, byte[] replaceData, bool truckLength = true, bool hightlight = false) =>
             ReplaceFirst(findData, replaceData, truckLength, SelectionStart + 1, hightlight);
 
         /// <summary>
-        /// Replace the next byte array define by findData in byteprovider at SelectionStart. 
+        /// Replace the next byte array define by findData in byteprovider at SelectionStart.
         /// No highlight
         /// Truck replace data to length of findData
         /// </summary>
@@ -3388,7 +3388,7 @@ namespace WpfHexaEditor
             ReplaceFirst(findData, replaceData, true, SelectionStart + 1, false);
 
         /// <summary>
-        /// Replace the next byte array define by findData in byteprovider at SelectionStart. 
+        /// Replace the next byte array define by findData in byteprovider at SelectionStart.
         /// No highlight
         /// </summary>
         /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
@@ -3396,14 +3396,14 @@ namespace WpfHexaEditor
             ReplaceFirst(findData, replaceData, truckLength, SelectionStart + 1, false);
 
         /// <summary>
-        /// Replace the next string define by find in byteprovider at SelectionStart. 
+        /// Replace the next string define by find in byteprovider at SelectionStart.
         /// </summary>
         /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
         public long ReplaceNext(string find, string replace, bool truckLength = true, bool hightlight = false) =>
             ReplaceFirst(StringToByte(find), StringToByte(replace), truckLength, SelectionStart + 1, hightlight);
 
         /// <summary>
-        /// Replace the next string define by find in byteprovider at SelectionStart. 
+        /// Replace the next string define by find in byteprovider at SelectionStart.
         /// No highlight
         /// Truck replace data to length of findData
         /// </summary>
@@ -3412,7 +3412,7 @@ namespace WpfHexaEditor
             ReplaceFirst(StringToByte(find), StringToByte(replace), true, SelectionStart + 1, false);
 
         /// <summary>
-        /// Replace the next string define by find in byteprovider at SelectionStart. 
+        /// Replace the next string define by find in byteprovider at SelectionStart.
         /// No highlight
         /// </summary>
         /// <returns>Return the position of replace. Return -1 on error/no replace</returns>
@@ -3420,7 +3420,7 @@ namespace WpfHexaEditor
             ReplaceFirst(StringToByte(find), StringToByte(replace), truckLength, SelectionStart + 1, false);
 
         /// <summary>
-        /// Replace the all byte array define by findData in byteprovider. 
+        /// Replace the all byte array define by findData in byteprovider.
         /// </summary>
         /// <returns>Return the an IEnumerable contains all positions are replaced. Return null on error/no replace</returns>
         public IEnumerable<long> ReplaceAll(byte[] findData, byte[] replaceData, bool truckLength = true, bool hightlight = false)
@@ -3452,7 +3452,7 @@ namespace WpfHexaEditor
         }
 
         /// <summary>
-        /// Replace the all byte array define by findData in byteprovider. 
+        /// Replace the all byte array define by findData in byteprovider.
         /// No highlight
         /// </summary>
         /// <returns>Return the position of replace. Return null on error/no replace</returns>
@@ -3460,14 +3460,14 @@ namespace WpfHexaEditor
             ReplaceAll(findData, replaceData, truckLength, false);
 
         /// <summary>
-        /// Replace the all string define by find in byteprovider. 
+        /// Replace the all string define by find in byteprovider.
         /// </summary>
         /// <returns>Return the position of replace. Return null on error/no replace</returns>
         public IEnumerable<long> ReplaceAll(string find, string replace, bool truckLength = true, bool hightlight = false) =>
             ReplaceAll(StringToByte(find), StringToByte(replace), truckLength, hightlight);
 
         /// <summary>
-        /// Replace the all string define by find in byteprovider.  
+        /// Replace the all string define by find in byteprovider.
         /// No highlight
         /// Truck replace data to length of find
         /// </summary>
@@ -3476,7 +3476,7 @@ namespace WpfHexaEditor
             ReplaceAll(StringToByte(find), StringToByte(replace), true, false);
 
         /// <summary>
-        /// Replace the all byte array define by findData in byteprovider.  
+        /// Replace the all byte array define by findData in byteprovider.
         /// No highlight
         /// </summary>
         /// <returns>Return the position of replace. Return null on error/no replace</returns>
@@ -3624,7 +3624,7 @@ namespace WpfHexaEditor
 
             #endregion
 
-            #region Check if position already exist and exit if exist                
+            #region Check if position already exist and exit if exist
 
             if (marker != ScrollMarker.SelectionStart)
             {
@@ -3776,7 +3776,7 @@ namespace WpfHexaEditor
         {
             if (!AllowContextMenu) return;
 
-            //position                
+            //position
             if (sender is IByteControl ctrl)
                 _rightClickBytePosition = ctrl.BytePositionInStream;
 
@@ -4208,7 +4208,7 @@ namespace WpfHexaEditor
                 new FrameworkPropertyMetadata(ByteSpacerGroup.EightByte, ByteSpacer_Changed));
 
         /// <summary>
-        /// Get or set the visual of byte spacer 
+        /// Get or set the visual of byte spacer
         /// </summary>
         public ByteSpacerVisual ByteSpacerVisualStyle
         {
@@ -4358,13 +4358,13 @@ namespace WpfHexaEditor
         #region Drag and drop support
 
         /// <summary>
-        /// Allow the control to catch the file dropping 
+        /// Allow the control to catch the file dropping
         /// Note : AllowDrop need to be true
         /// </summary>
         public bool AllowFileDrop { get; set; } = true;
 
         /// <summary>
-        /// Allow the control to catch the text dropping 
+        /// Allow the control to catch the text dropping
         /// Note : AllowDrop need to be true
         /// </summary>
         public bool AllowTextDrop { get; set; } = true;
@@ -4456,7 +4456,7 @@ namespace WpfHexaEditor
         {
             if (!CheckIsOpen(_provider)) return;
             if (!File.Exists(filename)) return;
-            
+
             SetState(XDocument.Load(filename));
         }
 
@@ -4545,7 +4545,7 @@ namespace WpfHexaEditor
                             new XAttribute("Filename", _tblCharacterTable.FileName),
                             new XAttribute("Data", _tblCharacterTable.ToString())));
             #endregion
-                        
+
             return doc;
         }
 
@@ -4576,7 +4576,7 @@ namespace WpfHexaEditor
 
                             #region Set action
 
-                            bm.Action = at.Value switch 
+                            bm.Action = at.Value switch
                             {
                                 "Modified" => ByteAction.Modified,
                                 "Deleted" => ByteAction.Deleted,
@@ -4615,7 +4615,7 @@ namespace WpfHexaEditor
             }
             #endregion
 
-            #region Load highlight            
+            #region Load highlight
             UnHighLightAll();
 
             var hlList = doc.Element("WpfHexEditor").Element("HighLights").Elements().Select(i => i);
@@ -4654,7 +4654,7 @@ namespace WpfHexaEditor
             }
             #endregion
 
-            #region Load TBL            
+            #region Load TBL
             var tblList = doc.Element("WpfHexEditor").Element("TBL").Elements().Select(i => i);
 
             foreach (var element in tblList)
@@ -4699,7 +4699,7 @@ namespace WpfHexaEditor
         #region Shift the first visible byte in the views to the left ...
 
         /// <summary>
-        /// Shift the first visible byte in the view to the left. 
+        /// Shift the first visible byte in the view to the left.
         /// </summary>
         /// <remarks>
         /// Very useful for editing fixed-width tables. Use with BytePerLine to create visual tables ...
@@ -4781,14 +4781,14 @@ namespace WpfHexaEditor
         }
 
         /// <summary>
-        /// Set the last byte are virtually loaded in the control. 
+        /// Set the last byte are virtually loaded in the control.
         /// Note that all other bytes address after will not be shown in control.
         /// This property are read only
         /// </summary>
         public long VisualByteAdressStop => VisualByteAdressStart + VisualByteAdressLength;
 
         /// <summary>
-        /// Set the length from first byte set by VisualStartByteAdress property are virtually loaded in the control. 
+        /// Set the length from first byte set by VisualStartByteAdress property are virtually loaded in the control.
         /// </summary>
         public long VisualByteAdressLength
         {
@@ -4822,7 +4822,7 @@ namespace WpfHexaEditor
         }
 
         /// <summary>
-        /// Set the first byte are virtually loaded in the control. 
+        /// Set the first byte are virtually loaded in the control.
         /// Note that all other bytes address before will not be shown in control.
         /// </summary>
         public long VisualByteAdressStart
@@ -4873,7 +4873,7 @@ namespace WpfHexaEditor
 
         #region Zoom in/out support
         /// <summary>
-        /// Get or set the zoom scale 
+        /// Get or set the zoom scale
         /// Posible Scale : 0.5 to 2.0 (50% to 200%)
         /// </summary>
         public double ZoomScale
@@ -5060,7 +5060,7 @@ namespace WpfHexaEditor
             UpdateSelectionColor(ctrl is StringByte ? FirstColor.StringByteData : FirstColor.HexByteData);
             UpdateVisual();
 
-            //launch click event 
+            //launch click event
             ByteClick?.Invoke(sender, e);
         }
 
@@ -5092,7 +5092,7 @@ namespace WpfHexaEditor
             UpdateSelectionColor(ctrl is StringByte ? FirstColor.StringByteData : FirstColor.HexByteData);
             UpdateVisual();
 
-            //launch click event 
+            //launch click event
             ByteDoubleClick?.Invoke(sender, e);
         }
         #endregion
