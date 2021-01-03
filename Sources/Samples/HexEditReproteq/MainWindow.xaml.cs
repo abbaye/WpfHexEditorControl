@@ -236,12 +236,12 @@ namespace HexEditReproteq
         private void CmpFiles_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBox.Show("Cmp Files");
+            MessageBox.Show("Cmp 2 Files and save diff patch");
 
         }
         private void Patching_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Patching");
+            MessageBox.Show("Patching File");
         }
         // end reproteq
 
