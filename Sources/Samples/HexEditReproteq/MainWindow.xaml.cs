@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Microsoft.Win32;
+using WpfHexaEditor;
 using WpfHexaEditor.Core;
 using WpfHexaEditor.Core.CharacterTable;
 using WpfHexaEditor.Dialog;
@@ -217,7 +218,7 @@ namespace HexEditReproteq
 
         private void CloseFile()
         {
-            if (FileTab.SelectedIndex == -1) return;
+            if (FileTab.SelectedIndex == -1) return; 
 
             HexEdit.CloseProvider();
             FileTab.Items.RemoveAt(FileTab.SelectedIndex);
@@ -234,21 +235,46 @@ namespace HexEditReproteq
 
 
         //----------------------- reproteq functions -----------------------------------------
-
+         
 
         //-----------------------------cmp function ------------------------------------- 
         private void CmpFiles_Click(object sender, RoutedEventArgs e)
         {
+
             Debug.WriteLine("Reproteq Funtion Cmp Files ");
+            //  var xxx = this.FileTab.Items.Count.ToString(); // tab counter
+            //  var xxx = this.FileTab.SelectedIndex.ToString();// index selected
+            //  var xxx = this.FileTab.SelectedValue.ToString();// tab filename (el nombre del archivo cargado en el tab)
 
-            var xfile = FileTab.Items.CurrentItem;
 
-            var File1 = FileTab.SelectedIndex-1;
-            var File2 = FileTab.SelectedIndex;
+            // GetAllBytes string ToTblString(byte[] data)  class ByteProvider : IDisposable  class PathToFilenameConverter : IValueConverter  SubmitChanges() using (var memoryStream = new MemoryStream()) var newStream = Length < ConstantReadOnly.Largefilelength
+            // var newStream = Length < ConstantReadOnly.Largefilelength
+
+
+
+
+            //var xxx = File.ReadAllBytes.ToString();
+            // var ruta = @"C:\test\a.bin";
+
+            //  var lines = File.ReadAllBytes(ruta);
+            //  string xxx = HexEditor.GetAllBytes();
+            var xxx = "filename loaded";
+ 
+
+             
+
+            var xfile ="" ;
+
+            var File1 = FileTab.SelectedIndex-1; // index tab 0 
+            var File2 = FileTab.SelectedIndex;// index tab 1
+
             Debug.WriteLine("Dbg  " + File1);
 
-            MessageBox.Show("Cmp 2 Files and save diff patch" + File1 + " cmp "+ File2);
-            Debug.WriteLine("Cmp 2 Files and save diff patch" + File1 + " cmp " + File2);
+            MessageBox.Show("Cmp 2 Files and save diff patch" + File1 + " cmp "+ File2 + " test " + xxx);
+            Debug.WriteLine("Cmp 2 Files and save diff patch" + File1 + " cmp " + File2 +" test " + xxx);
+
+            // Debug.WriteLine(this.FileTab.SelectedValue.ToString()); // filename 1
+
         }
 
         //-----------------------------end cmp function ---------------------------------- 
@@ -261,6 +287,7 @@ namespace HexEditReproteq
             MessageBox.Show("Patching File" + File1);
            
         }
+
 
         //-----------------------------end patching function ---------------------------- 
 
