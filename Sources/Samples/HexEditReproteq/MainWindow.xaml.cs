@@ -230,5 +230,22 @@ namespace HexEditReproteq
 
         private void SetReadOnlyMenu_Click(object sender, RoutedEventArgs e) => 
             HexEdit.ReadOnlyMode = SetReadOnlyMenu.IsChecked;
+
+
+        // reproteq
+        private void CmpFiles_Click(object sender, RoutedEventArgs e)
+        {
+
+            MessageBox.Show("Cmp Files");
+
+        }
+        private void Patching_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Patching");
+        }
+        // end reproteq
+
+
+
     }
 }

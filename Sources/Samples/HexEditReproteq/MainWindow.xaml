@@ -301,6 +301,21 @@
                         ToolTip="Zoom editor (50% to 200%)"
                         Value="{Binding ElementName=HexEdit, Path=ZoomScale}" />
                 </MenuItem>
+
+                <MenuItem Header="Repro">
+                    <MenuItem
+                        x:Name="Cmp2Files"
+                        Click="CmpFiles_Click"
+                        Header="Cmp2Files" />
+                    <Separator />
+                    <MenuItem
+                        x:Name="Patching"
+                        Click="Patching_Click"
+                        Header="Patching" />
+                    <Separator />
+                </MenuItem>
+
+
             </Menu>
 
             <Grid>
