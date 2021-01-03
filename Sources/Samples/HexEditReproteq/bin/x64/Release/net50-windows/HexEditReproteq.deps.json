@@ -1,0 +1,53 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "HexEditReproteq/1.0.0": {
+        "dependencies": {
+          "WPFHexaEditor": "2.1.5"
+        },
+        "runtime": {
+          "HexEditReproteq.dll": {}
+        }
+      },
+      "WPFHexaEditor/2.1.5": {
+        "runtime": {
+          "WPFHexaEditor.dll": {}
+        },
+        "resources": {
+          "fr-CA/WPFHexaEditor.resources.dll": {
+            "locale": "fr-CA"
+          },
+          "pl-PL/WPFHexaEditor.resources.dll": {
+            "locale": "pl-PL"
+          },
+          "pt-BR/WPFHexaEditor.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "ru-RU/WPFHexaEditor.resources.dll": {
+            "locale": "ru-RU"
+          },
+          "zh-CN/WPFHexaEditor.resources.dll": {
+            "locale": "zh-CN"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "HexEditReproteq/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WPFHexaEditor/2.1.5": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
