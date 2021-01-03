@@ -232,18 +232,31 @@ namespace HexEditReproteq
             HexEdit.ReadOnlyMode = SetReadOnlyMenu.IsChecked;
 
 
-        // reproteq
+        //----------------------- reproteq functions -----------------------------------------
+
+
+        //-----------------------------cmp function ------------------------------------- 
         private void CmpFiles_Click(object sender, RoutedEventArgs e)
         {
 
             MessageBox.Show("Cmp 2 Files and save diff patch");
 
         }
+
+        //-----------------------------end cmp function ---------------------------------- 
+
+        //-----------------------------patching function --------------------------------- 
         private void Patching_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Patching File");
+            var File1 = FileTab.SelectedIndex;
+            MessageBox.Show("Patching File" + File1);
+           
         }
-        // end reproteq
+
+        //-----------------------------end patching function ---------------------------- 
+
+
+        //---------------------- end reproteq -----------------------------------------------
 
 
 

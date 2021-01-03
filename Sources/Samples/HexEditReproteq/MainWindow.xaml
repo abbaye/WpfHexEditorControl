@@ -15,7 +15,7 @@
     Width="900"
     Height="530"
     Closing="Window_Closing"
-    Icon="Resources/Icon/Logo-Icon.ico"
+    Icon="/ChipIcon.ico"
     mc:Ignorable="d">
     <Grid>
         <DockPanel>
