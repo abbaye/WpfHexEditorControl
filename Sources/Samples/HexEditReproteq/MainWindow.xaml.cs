@@ -6,6 +6,7 @@
 // NOT A TRUE PROJECT! IT'S JUST FOR TESTING THE HEXEDITOR... DO NOT WATCH THE CODE LOL ;) 
 //////////////////////////////////////////////
 
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -238,14 +239,16 @@ namespace HexEditReproteq
         //-----------------------------cmp function ------------------------------------- 
         private void CmpFiles_Click(object sender, RoutedEventArgs e)
         {
+            Debug.WriteLine("Reproteq Funtion Cmp Files ");
 
-                         
+            var xfile = FileTab.Items.CurrentItem;
 
-            var File1 = FileTab.SelectedIndex;
+            var File1 = FileTab.SelectedIndex-1;
             var File2 = FileTab.SelectedIndex;
+            Debug.WriteLine("Dbg  " + File1);
 
-            MessageBox.Show("Cmp 2 Files and save diff patch" + File1 + " cmp "+File2);
-
+            MessageBox.Show("Cmp 2 Files and save diff patch" + File1 + " cmp "+ File2);
+            Debug.WriteLine("Cmp 2 Files and save diff patch" + File1 + " cmp " + File2);
         }
 
         //-----------------------------end cmp function ---------------------------------- 
@@ -253,6 +256,7 @@ namespace HexEditReproteq
         //-----------------------------patching function --------------------------------- 
         private void Patching_Click(object sender, RoutedEventArgs e)
         {
+            Debug.WriteLine("Reproteq Funtion Patching Files ");
             var File1 = FileTab.SelectedIndex;
             MessageBox.Show("Patching File" + File1);
            
