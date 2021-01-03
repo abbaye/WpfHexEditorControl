@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>net50-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>ChipIcon.ico</ApplicationIcon>
+    <ApplicationIcon>LogoIcon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
@@ -19,10 +19,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ChipIcon.ico" />
+    <None Remove="LogoIcon.ico" />
     <None Remove="Resources\Icon\0x-Icon.ico" />
     <None Remove="Resources\Icon\Close-Icon.ico" />
-    <None Remove="Resources\Icon\Logo-Icon.ico" />
     <None Remove="Resources\Icon\Open-File-Icon.ico" />
     <None Remove="Resources\Icon\Save-Icon.ico" />
   </ItemGroup>
@@ -32,10 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="ChipIcon.ico" />
+    <Resource Include="LogoIcon.ico" />
+    <Resource Include="Resources\Icon\LogoIcon.ico" />
     <Resource Include="Resources\Icon\0x-Icon.ico" />
     <Resource Include="Resources\Icon\Close-Icon.ico" />
-    <Resource Include="Resources\Icon\Logo-Icon.ico" />
     <Resource Include="Resources\Icon\Open-File-Icon.ico" />
     <Resource Include="Resources\Icon\Save-Icon.ico" />
   </ItemGroup>

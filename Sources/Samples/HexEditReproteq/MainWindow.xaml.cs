@@ -239,7 +239,12 @@ namespace HexEditReproteq
         private void CmpFiles_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBox.Show("Cmp 2 Files and save diff patch");
+                         
+
+            var File1 = FileTab.SelectedIndex;
+            var File2 = FileTab.SelectedIndex;
+
+            MessageBox.Show("Cmp 2 Files and save diff patch" + File1 + " cmp "+File2);
 
         }
 
