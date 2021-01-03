@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HexEditReproteq", "HexEditReproteq.csproj", "{E79391CD-F92E-4A1E-929C-37CFB9EBCAA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfHexEditorCore", "..\..\WPFHexaEditor\WpfHexEditorCore.csproj", "{CBC9DAED-D5F6-490D-9BF7-BD1AB1787572}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E79391CD-F92E-4A1E-929C-37CFB9EBCAA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E79391CD-F92E-4A1E-929C-37CFB9EBCAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E79391CD-F92E-4A1E-929C-37CFB9EBCAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E79391CD-F92E-4A1E-929C-37CFB9EBCAA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBC9DAED-D5F6-490D-9BF7-BD1AB1787572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC9DAED-D5F6-490D-9BF7-BD1AB1787572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC9DAED-D5F6-490D-9BF7-BD1AB1787572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC9DAED-D5F6-490D-9BF7-BD1AB1787572}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E616862C-9482-42E9-A6C5-08CC1E22F215}
+	EndGlobalSection
+EndGlobal
