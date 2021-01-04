@@ -20,7 +20,7 @@ using WpfHexaEditor.Dialog;
 
 namespace HexEditReproteq
 {
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
@@ -233,9 +233,15 @@ namespace HexEditReproteq
         private void SetReadOnlyMenu_Click(object sender, RoutedEventArgs e) => 
             HexEdit.ReadOnlyMode = SetReadOnlyMenu.IsChecked;
 
+        //-----------------------------abbaye functions ---------------------------------------
+
+        //------------------------------end abbaye functions --------------------------------- 
+
+
 
         //----------------------- reproteq functions -----------------------------------------
          
+
 
         //-----------------------------cmp function ------------------------------------- 
         private void CmpFiles_Click(object sender, RoutedEventArgs e)
