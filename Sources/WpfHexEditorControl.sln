@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfHexEditor.Sample", "Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHexEditor.Sample.AvalonDock", "Samples\WpfHexEditor.Sample.AvalonDock\WpfHexEditor.Sample.AvalonDock.csproj", "{6E3E68D0-8C8E-495E-84AC-A0DC9D52F369}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHexEditor.Sample.BarChart", "Samples\WpfHexEditor.Sample.BarChart\WpfHexEditor.Sample.BarChart.csproj", "{61C30859-C234-4AC4-BCCB-1BFE8202C2A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfHexEditor.Sample.BarChart", "Samples\WpfHexEditor.Sample.BarChart\WpfHexEditor.Sample.BarChart.csproj", "{61C30859-C234-4AC4-BCCB-1BFE8202C2A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHexEditor.Sample.BinaryFilesDifference", "Samples\WpfHexEditor.Sample.BinaryFilesDifference\WpfHexEditor.Sample.BinaryFilesDifference.csproj", "{2652120F-9599-44A4-95F2-CBD71F6134F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,18 @@ Global
 		{61C30859-C234-4AC4-BCCB-1BFE8202C2A6}.Release|x64.Build.0 = Release|Any CPU
 		{61C30859-C234-4AC4-BCCB-1BFE8202C2A6}.Release|x86.ActiveCfg = Release|Any CPU
 		{61C30859-C234-4AC4-BCCB-1BFE8202C2A6}.Release|x86.Build.0 = Release|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Debug|x64.Build.0 = Debug|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Debug|x86.Build.0 = Debug|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Release|x64.ActiveCfg = Release|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Release|x64.Build.0 = Release|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{2652120F-9599-44A4-95F2-CBD71F6134F6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +123,7 @@ Global
 		{80EB8D57-296B-4CD3-99D6-C227FD3BA286} = {E7C58EBD-5476-4A12-83EB-235DE68AF079}
 		{6E3E68D0-8C8E-495E-84AC-A0DC9D52F369} = {E7C58EBD-5476-4A12-83EB-235DE68AF079}
 		{61C30859-C234-4AC4-BCCB-1BFE8202C2A6} = {E7C58EBD-5476-4A12-83EB-235DE68AF079}
+		{2652120F-9599-44A4-95F2-CBD71F6134F6} = {E7C58EBD-5476-4A12-83EB-235DE68AF079}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B382CAE-4846-466E-A3D3-0842043B4012}

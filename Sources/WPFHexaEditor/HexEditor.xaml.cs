@@ -232,6 +232,12 @@ namespace WpfHexaEditor
         /// Occurs when the zoom scale is changed
         /// </summary>
         public event EventHandler ZoomScaleChanged;
+
+        /// <summary>
+        /// Occurs when the vertical scroll bar position as changed
+        /// </summary>
+        public event EventHandler<ByteEventArgs> VerticalScrollBarChanged;
+
         #endregion Events
 
         #region Constructor
@@ -673,7 +679,12 @@ namespace WpfHexaEditor
             return _provider.GetByteModifieds(act);
         }
 
-        public (byte? singleByte, bool succes) GetByte(long position, bool copyChange = true) => _provider.GetByte(position, copyChange);
+        public (byte? singleByte, bool succes) GetByte(long position, bool copyChange = true)
+        {
+            if (!CheckIsOpen(_provider)) return (null, false);
+
+            return _provider.GetByte(position, copyChange);
+        }
         #endregion Miscellaneous property/methods
 
         #region Data visual type support
@@ -2528,9 +2539,8 @@ namespace WpfHexaEditor
         }
 
         public static readonly DependencyProperty BytePerLineProperty =
-            DependencyProperty.Register("BytePerLine", typeof(int), typeof(HexEditor),
-                new FrameworkPropertyMetadata(16, BytePerLine_PropertyChanged,
-                    BytePerLine_CoerceValue));
+            DependencyProperty.Register(nameof(BytePerLine), typeof(int), typeof(HexEditor),
+                new FrameworkPropertyMetadata(16, BytePerLine_PropertyChanged, BytePerLine_CoerceValue));
 
         private static object BytePerLine_CoerceValue(DependencyObject d, object baseValue) =>
             (int)baseValue < 1 ? 1 : ((int)baseValue > 64 ? 64 : baseValue);
@@ -2573,9 +2583,8 @@ namespace WpfHexaEditor
         }
 
         public static readonly DependencyProperty StringByteWidthProperty =
-            DependencyProperty.Register("StringByteWidth", typeof(double), typeof(HexEditor),
-                new FrameworkPropertyMetadata(12d, StringByteWidth_PropertyChanged,
-                    StringByteWidth_CoerceValue));
+            DependencyProperty.Register(nameof(StringByteWidth), typeof(double), typeof(HexEditor),
+                new FrameworkPropertyMetadata(10d, StringByteWidth_PropertyChanged, StringByteWidth_CoerceValue));
 
         private static object StringByteWidth_CoerceValue(DependencyObject d, object baseValue) =>
             (double)baseValue < 1 ? 1 : ((double)baseValue > 64 ? 64 : baseValue);
@@ -2621,26 +2630,28 @@ namespace WpfHexaEditor
             }
         }
 
-        private void VerticalScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) =>
+        private void VerticalScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
             RefreshView();
+
+            VerticalScrollBarChanged?.Invoke(sender, new ByteEventArgs(FirstVisibleBytePosition));
+        }
 
         /// <summary>
         /// Update vertical scrollbar with file info
         /// </summary>
-        private void UpdateScrollBar()
-        {
+        private void UpdateScrollBar() => 
             VerticalScrollBar.With(c =>
-            {
-                c.Visibility = Visibility.Collapsed;
+                {
+                    c.Visibility = Visibility.Collapsed;
 
-                if (!CheckIsOpen(_provider)) return;
+                    if (!CheckIsOpen(_provider)) return;
 
-                c.Visibility = Visibility.Visible;
-                c.SmallChange = 1;
-                c.LargeChange = ScrollLargeChange;
-                c.Maximum = MaxLine - MaxVisibleLine + 1;
-            });
-        }
+                    c.Visibility = Visibility.Visible;
+                    c.SmallChange = 1;
+                    c.LargeChange = ScrollLargeChange;
+                    c.Maximum = MaxLine - MaxVisibleLine + 1;
+                });
         #endregion
 
         #region General update methods / Refresh view

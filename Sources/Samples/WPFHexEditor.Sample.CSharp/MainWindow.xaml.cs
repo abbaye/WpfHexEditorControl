@@ -30,7 +30,7 @@ namespace WPFHexaEditorExample
 
         private void OpenMenu_Click(object sender, RoutedEventArgs e)
         {
-            #region Create file fialog
+            #region Create file dialog
             var fileDialog = new OpenFileDialog
             {
                 Multiselect = true,

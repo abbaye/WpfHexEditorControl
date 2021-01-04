@@ -13,10 +13,12 @@ Namespace WPFHexaEditorExample
         End Sub
 
         Private Sub OpenMenu_Click(ByVal sender As Object, ByVal e As RoutedEventArgs)
+
             Dim fileDialog = New OpenFileDialog With {
                 .Multiselect = True,
                 .CheckFileExists = True
             }
+
             If fileDialog.ShowDialog() Is Nothing OrElse Not File.Exists(fileDialog.FileName) Then Return
 
             For Each ti As TabItem In FileTab.Items
