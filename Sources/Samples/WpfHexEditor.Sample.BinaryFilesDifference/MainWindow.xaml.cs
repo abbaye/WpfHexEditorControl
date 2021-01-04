@@ -91,33 +91,60 @@ namespace WpfHexEditor.Sample.BinaryFilesDifference
 
             if (FirstFile.FileName == string.Empty || SecondFile.FileName == string.Empty) return;
 
+            //variable
             var firstFileLength = FirstFile.Length;
             var secondFileLength = SecondFile.Length;
             var maxLenght = firstFileLength > secondFileLength ? firstFileLength : secondFileLength;
-
-            for(int i = 0; i < maxLenght; i++)
+            var cbb = new CustomBackgroundBlock();
+            int j = 0;
+            var rndBrushes = RandomBrushes.PickBrush();
+            var ok = false;
+            
+            for (int i = 0; i < maxLenght; i++)
             {
                 var firstFileByte = FirstFile.GetByte(i, true);
                 var secondFileByte = SecondFile.GetByte(i, true);
                 var equal = firstFileByte.singleByte == secondFileByte.singleByte;
 
-                if (equal) continue;
+                if (!equal)
+                {
+                    //build CustomBackgroundBlock
+                    if (j == 0)
+                    {
+                        cbb = new CustomBackgroundBlock(i, ++j, rndBrushes);
+                        ok = true;
+                    }
+                    else
+                    {
+                        cbb.Length = ++j;
+                        rndBrushes = RandomBrushes.PickBrush();
+                        ok = true;
+                    }
+                }
+                else
+                {
+                    if (ok)
+                    {
+                        //add to hexeditor
+                        FirstFile.CustomBackgroundBlockItems.Add(cbb);
+                        SecondFile.CustomBackgroundBlockItems.Add(cbb);
 
-                var cbb = new CustomBackgroundBlock(i, 1, Brushes.Cyan);
+                        //add to list
+                        FileDifferenceList.Items.Add
+                        (
+                            $"0x{cbb.StartOffset:X2}  Lenght: {cbb.Length} bytes  Colors: {cbb.Color}"
+                        );
 
-                FirstFile.CustomBackgroundBlockItems.Add(cbb);
-                SecondFile.CustomBackgroundBlockItems.Add(cbb);
+                        //reset variable
+                        j = 0;
+                        ok = false;
+                    }
 
-
-
-
-                string test = $"0x{i:X2}  Ori: 0x{firstFileByte.singleByte.Value:X2}  Mod: 0x{secondFileByte.singleByte.Value:X2}";
-
-                FileDifferenceList.Items.Add(test);
-
-
+                    continue;
+                }
             }
 
+            //refresh editor
             FirstFile.RefreshView();
             SecondFile.RefreshView();
         }
